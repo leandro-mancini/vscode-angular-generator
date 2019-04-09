@@ -37,15 +37,50 @@ export class FileHelper {
     }
 
     public static createHtml(componentDir: string, componentName: string, config: HTMLConfig): Observable<string> {
-        return Observable.of();
+        let templateFileName = this.assetRootDir + '/templates/html.template';
+        
+        let htmlContent = fs.readFileSync( templateFileName ).toString();
+
+        let filename = `${componentDir}/${componentName}.component.${config.extension}`;
+        if (config.create) {
+            return this.createFile(filename, htmlContent)
+                .map(result => filename);
+        }
+        else {
+            return Observable.of('');
+        }
     }
 
     public static createCss(componentDir: string, componentName: string, config: CSSConfig): Observable<string> {
-        return Observable.of();
+        let templateFileName = this.assetRootDir + '/templates/css.template';
+        let cssContent = fs.readFileSync( templateFileName ).toString();
+        let filename = `${componentDir}/${componentName}.component.${config.extension}`;
+
+        if (config.create) {
+            return this.createFile(filename, cssContent)
+                .map(result => filename);
+        } else {
+            return Observable.of('');
+        }
     }
 
     public static createModule(componentDir: string, componentName: string, globalConfig: GlobalConfig, config: ModuleConfig): Observable<string> {
-        return Observable.of();
+        let templateFileName = this.assetRootDir + '/templates/module.template';
+
+        let moduleContent = fs.readFileSync( templateFileName ).toString()
+            .replace(/{componentName}/g, componentName)
+            .replace(/{className}/g, changeCase.pascalCase(componentName))
+            .replace(/{quotes}/g, this.getQuotes(globalConfig));
+
+        let filename = `${componentDir}/${componentName}.module.${config.extension}`;
+
+        if (config.create) {
+            return this.createFile(filename, moduleContent)
+                .map(result => filename);
+        }
+        else {
+            return Observable.of('');
+        }
     }
 
     public static createComponentDir(uri: any, componentName: string, globalConfig: GlobalConfig): string {
