@@ -40,6 +40,8 @@ export function activate(context: vscode.ExtensionContext) {
 			.concatMap(val => {
 				if (val === undefined || val.length === 0) {
 					vscode.window.showErrorMessage('O nome do componente não pode está vazio.');
+
+					return Observable.of();
 				}
 
 				let componentName = changeCase.paramCase(val);
@@ -52,11 +54,8 @@ export function activate(context: vscode.ExtensionContext) {
 					FileHelper.createModule(componentDir, componentName, _config.global, _config.files.module)
 				);
 			})
-			.do(editor => {
-				console.log('editor', editor);
-			})
 			.subscribe(() => {
-				vscode.window.setStatusBarMessage('Componente creado com sucesso!', 5000);
+				vscode.window.setStatusBarMessage('Componente creado com sucesso!', 2000);
 			}, err => vscode.window.showErrorMessage(err.message));
 
 		
