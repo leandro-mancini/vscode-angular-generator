@@ -17,7 +17,7 @@
 		"commands": [
 			{
 				"command": "extension.helloWorld",
-				"title": "Create template"
+				"title": "Apollo Create template"
 			}
 		],
 		"menus": {
@@ -48,6 +48,6 @@
 		"fs": "0.0.1-security",
 		"fs-extra": "^7.0.1",
 		"lodash": "^4.17.11",
-		"rxjs": "^6.4.0"
+		"rxjs": "^5.0.0-rc.1"
 	}
 }

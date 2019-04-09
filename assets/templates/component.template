@@ -1,0 +1,20 @@
+import { Component } from {quotes}@angular/core{quotes};
+
+@Component({
+    selector: {quotes}app-{selector}{quotes},
+    templateUrl: {quotes}{templateUrl}{quotes},
+    styleUrls: [{quotes}{styleUrls}{quotes}]
+})
+export class {className}Component {
+    metodo1() {
+        console.log('Metodo 1');
+    }
+
+    metodo3() {
+        console.log('Metodo 3');
+    }
+
+    metodo2() {
+        console.log('Metodo 2');
+    }
+}
